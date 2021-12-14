@@ -38,7 +38,7 @@ const InfoScreen = () => {
                     };
                     infor.push(information);
                 });
-                console.log(infor)
+                console.log('hhoho',infor)
                 setData(infor);
             });
     };
