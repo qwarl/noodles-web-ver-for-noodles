@@ -32,7 +32,7 @@ const InfoScreen = () => {
                 snapshot.forEach(child => {
                     let information = {
                         fullname: child.val().FullName,
-                        birthay: child.val().Birthay,
+                        birthday: child.val().Birthday,
                         gender: child.val().Gender,
                         department: child.val().Department,
                     };
@@ -46,7 +46,7 @@ const InfoScreen = () => {
     useEffect(() => {
         getuser();
         console.log('huhuhu', data)
-    }, [data]);
+    }, []);
 
     return (
 
