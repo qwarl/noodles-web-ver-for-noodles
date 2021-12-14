@@ -31,10 +31,10 @@ const InfoScreen = () => {
                 var infor = [];
                 snapshot.forEach(child => {
                     let information = {
-                        fullname: child.val().fullname,
-                        birthay: child.val().birthay,
-                        gender: child.val().gender,
-                        department: child.val().department,
+                        fullname: child.val().FullName,
+                        birthay: child.val().Birthay,
+                        gender: child.val().Gender,
+                        department: child.val().Department,
                     };
                     infor.push(information);
                 });
