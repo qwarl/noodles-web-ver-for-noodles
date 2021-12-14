@@ -13,11 +13,7 @@ import avatar from '../img/Rosamundpike.jpg'
 import hover from '../img/hover.png'
 import unavailableNoodles from '../img/unavailableNoodles.png'
 import comeLater from '../img/comeLater.png'
-// import firebase from '../firebase/firebase'
-// import * as firebase from "firebase";
-import firebase from 'firebase/app'
-
-// import database from 'firebase/compat/database'
+import firebase from '../firebase/firebase'
 
 const InfoScreen = () => {
     const [selectedNoodles1, setSelectedNoodles1] = useState(false)
@@ -25,49 +21,32 @@ const InfoScreen = () => {
     const [selectedNoodles3, setSelectedNoodles3] = useState(false)
 
     //firebase
-    // const db = firebase.database().ref("noodles");
-    // console.log('hohoho',db);
+    const [data, setData] = useState([]);
+    const getuser = async () => {
+        await firebase
+            .database()
+            .ref()
+            .child('/noodles')
+            .on('value', snapshot => {
+                var infor = [];
+                snapshot.forEach(child => {
+                    let information = {
+                        fullname: child.val().fullname,
+                        birthay: child.val().birthay,
+                        gender: child.val().gender,
+                        department: child.val().department,
+                    };
+                    infor.push(information);
+                });
+                console.log(infor)
+                setData(infor);
+            });
+    };
 
     useEffect(() => {
-        const firebaseConfig = {
-            apiKey: "AIzaSyCGgZof1dA3IkGF2_Ky0sCpLtHLowIZyE4",
-            authDomain: "noodles-web-ver-for-noodles.firebaseapp.com",
-            projectId: "noodles-web-ver-for-noodles",
-            storageBucket: "noodles-web-ver-for-noodles.appspot.com",
-            messagingSenderId: "21502481984",
-            appId: "1:21502481984:web:2f158e27bdcb85da64b1a5",
-            measurementId: "G-CF7TW8LV3N"
-        };
-
-        if (!firebase.apps.length) {
-            // Initialize Firebase
-            firebase.initializeApp(firebaseConfig);
-            console.log("\nKết nối firebase thành công\n")
-        }
-        get_DATA()
-    }, [])
-
-    const get_DATA = () => {
-        console.log('firebase: ',firebase.database().ref('noodles'))
-
-        // firebase.database().ref('Noodles/').on('value', function (snapshot) {
-
-        //   let array = [];
-        //   snapshot.forEach(function (childSnapshot) {
-        //     var childData = childSnapshot.val();
-        //     array.push({
-        //   id: childSnapshot.key,
-        //   fullname: childData.FullName,
-        //   address: childData.address,
-
-        //     });
-        //   });
-        //   console.log(array)
-        //   setData(array)
-
-        // });
-    }
-
+        getuser();
+        console.log('huhuhu', data)
+    }, [data]);
 
     return (
 
@@ -93,6 +72,7 @@ const InfoScreen = () => {
                 </View>
                 <View style={styles.css_viewFill}>
                     <Text style={styles.css_textFill}>
+                        {/* {data[0].fullname} */}
                         Alice Mie
                     </Text>
                     <Text style={styles.css_textFill}>
