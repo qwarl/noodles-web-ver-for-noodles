@@ -15,15 +15,16 @@ import unavailableNoodles from '../img/unavailableNoodles.png'
 import comeLater from '../img/comeLater.png'
 import firebase from '../firebase/firebase'
 
-const InfoScreen = () => {
+const InfoScreen = ({ navigation }) => {
     const [selectedNoodles1, setSelectedNoodles1] = useState(false)
     const [selectedNoodles2, setSelectedNoodles2] = useState(false)
     const [selectedNoodles3, setSelectedNoodles3] = useState(false)
+    const [comeBackLater, setComeBackLater] = useState(false)
 
     //firebase
     const [data, setData] = useState([]);
-    const getuser = () => {
-        firebase
+    const getuser = async () => {
+        await firebase
             .database()
             .ref()
             .child('noodles')
@@ -39,7 +40,7 @@ const InfoScreen = () => {
                     infor.push(information);
                     // setData([1, 2, 3]);
                 });
-                setData(infor[0]);
+                setData(infor[1]);
                 console.log('data', data);
             });
     };
@@ -92,33 +93,12 @@ const InfoScreen = () => {
             </ImageBackground>
 
             {/* ly my khi da het */}
-            {/* <View style={styles.css_unavailableNoodles}>
+            <View style={styles.css_unavailableNoodles}>
                 <Image style={styles.unavailableNoodles} source={unavailableNoodles} />
                 <Image style={styles.unavailableNoodles} source={unavailableNoodles} />
                 <Image style={styles.unavailableNoodles} source={unavailableNoodles} />
-            </View> */}
+            </View>
             {/* ly my khi con */}
-            {/* <View style={styles.css_noodles}>
-                <TouchableOpacity onPress={() => { setSelectedNoodles1(!selectedNoodles1) }}>
-                    {selectedNoodles1 == true && (
-                        <Image style={styles.hover1} source={hover} />
-                    )}
-                    <Image style={styles.noodles} source={noodles1} />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => { setSelectedNoodles2(!selectedNoodles2) }}>
-                    {selectedNoodles2 == true && (
-                        <Image style={styles.hover1} source={hover} />
-                    )}
-                    <Image style={styles.noodles} source={noodles2} />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => { setSelectedNoodles3(!selectedNoodles3) }}>
-                    {selectedNoodles3 == true && (
-                        <Image style={styles.hover1} source={hover} />
-                    )}
-                    <Image style={styles.noodles} source={noodles3} />
-                </TouchableOpacity>
-            </View> */}
-
             <View style={styles.css_noodles}>
                 <TouchableOpacity onPress={() => { setSelectedNoodles1(!selectedNoodles1) }}>
                     {selectedNoodles1 == true && (
@@ -149,8 +129,15 @@ const InfoScreen = () => {
                 <Text style={styles.css_number}>3 </Text>
                 <Text style={styles.css_noti}>cups of noodles left this month</Text>
             </View>
-            <Image style={styles.GetNoodles} source={GetNoodles} />
-            <Image style={styles.comeLater} source={comeLater} />
+
+            <TouchableOpacity onPress={() => navigation.navigate('DoneScreen')}>
+                <Image style={styles.GetNoodles} source={GetNoodles} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => { setComeBackLater(!comeBackLater) }}>
+                {comeBackLater == true && (
+                    <Image style={styles.comeLater} source={comeLater} />
+                )}
+            </TouchableOpacity>
         </ImageBackground >
     )
 }

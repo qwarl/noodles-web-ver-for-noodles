@@ -4,7 +4,7 @@ import InfoScreen from '../screens/InfoScreen';
 import DoneScreen from '../screens/DoneScreen'
 import { createStackNavigator } from '@react-navigation/stack'
 
-const DrawerNavigation = ({ navigation }) => {
+const NavigationScreens = () => {
     const Stack = createStackNavigator();
     const screenOptions = {
         headerShown: false,
@@ -17,6 +17,6 @@ const DrawerNavigation = ({ navigation }) => {
     )
 }
 
-export default DrawerNavigation
+export default NavigationScreens
 
 const styles = StyleSheet.create({})

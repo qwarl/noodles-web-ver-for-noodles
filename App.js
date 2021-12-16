@@ -26,13 +26,17 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import InfoScreen from './src/screens/InfoScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import NavigationScreens from './src/navigations/NavigationScreens';
 
 const App: () => Node = () => {
   
   return (
   
-
-   <InfoScreen/>
+<NavigationContainer>
+  <NavigationScreens/>
+</NavigationContainer>
+  //  <InfoScreen/>
     
   );
 };
