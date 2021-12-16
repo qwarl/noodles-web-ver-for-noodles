@@ -22,11 +22,12 @@ const InfoScreen = () => {
 
     //firebase
     const [data, setData] = useState([]);
-    const getuser = async () => {
-        await firebase
+
+    const getuser = () => {
+        firebase
             .database()
             .ref()
-            .child('/noodles')
+            .child('noodles')
             .on('value', snapshot => {
                 var infor = [];
                 snapshot.forEach(child => {
@@ -38,14 +39,13 @@ const InfoScreen = () => {
                     };
                     infor.push(information);
                 });
-                console.log('hhoho',infor)
-                setData(infor);
+                setData(infor[1]);
+                console.log('data', data);
             });
     };
 
     useEffect(() => {
         getuser();
-        console.log('huhuhu', data)
     }, []);
 
     return (
@@ -72,17 +72,20 @@ const InfoScreen = () => {
                 </View>
                 <View style={styles.css_viewFill}>
                     <Text style={styles.css_textFill}>
-                        {/* {data[0].fullname} */}
-                        Alice Mie
+                        {data.fullname}
+                        {/* Alice Mie */}
                     </Text>
                     <Text style={styles.css_textFill}>
-                        12/10/1999
+                        {/* 12/10/1999 */}
+                        {data.birthday}
                     </Text>
                     <Text style={styles.css_textFill}>
-                        Female
+                        {/* Female */}
+                        {data.gender}
                     </Text>
                     <Text style={styles.css_textFill}>
-                        Design
+                        {/* Design */}
+                        {data.department}
                     </Text>
                 </View>
             </ImageBackground>
