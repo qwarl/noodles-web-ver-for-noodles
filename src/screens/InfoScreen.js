@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, Image, Dimensions, ImageBackground, StatusBar, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, Image, Dimensions, ImageBackground, StatusBar, TouchableOpacity, SafeAreaView } from 'react-native'
 const { width, height } = Dimensions.get('window');
 import bg from '../img/bg.png'
 import logo from '../img/logo.png'
@@ -14,8 +14,12 @@ import hover from '../img/hover.png'
 import unavailableNoodles from '../img/unavailableNoodles.png'
 import comeLater from '../img/comeLater.png'
 import firebase from '../firebase/firebase'
+import { useSelector, useDispatch } from 'react-redux'
 
 const InfoScreen = ({ navigation }) => {
+    const Noodles = useSelector(state => state.NoodlesReducer.noodles);
+    console.log('ahaha', Noodles)
+
     const [selectedNoodles1, setSelectedNoodles1] = useState(false)
     const [selectedNoodles2, setSelectedNoodles2] = useState(false)
     const [selectedNoodles3, setSelectedNoodles3] = useState(false)
@@ -48,8 +52,34 @@ const InfoScreen = ({ navigation }) => {
     useEffect(() => {
         getuser();
     }, []);
+    const setNoodles1 = (noodles) => dispatch({
+        type: 'SET_NOODLES1',
+        payload: noodles
+    })
+    const setNoodles2 = (noodles) => dispatch({
+        type: 'SET_NOODLES2',
+        payload: noodles
+    })
+    const setNoodles3 = (noodles) => dispatch({
+        type: 'SET_NOODLES3',
+        payload: noodles
+    })
+    const dispatch = useDispatch();
 
+    const handleGetNoodles = () => {
+        //handle redux
+        if (selectedNoodles1) {
+            setNoodles1(false)
+        }
+        if (selectedNoodles2) {
+            setNoodles1(false)
+        }
+        if (selectedNoodles3) {
+            setNoodles1(false)
+        }
 
+        navigation.navigate('DoneScreen')
+    }
     return (
 
         <ImageBackground ImageBackground source={bg} resizeMode='cover' style={styles.container} >
@@ -126,11 +156,12 @@ const InfoScreen = ({ navigation }) => {
                 <Text style={styles.css_unavailableText}>Unavailable</Text>
             </View>
             <View style={{ flexDirection: 'row', marginTop: 8 }}>
-                <Text style={styles.css_number}>3 </Text>
+                <Text style={styles.css_number}>
+                    {Noodles.remain} </Text>
                 <Text style={styles.css_noti}>cups of noodles left this month</Text>
             </View>
 
-            <TouchableOpacity onPress={() => navigation.navigate('DoneScreen')}>
+            <TouchableOpacity onPress={handleGetNoodles}>
                 <Image style={styles.GetNoodles} source={GetNoodles} />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => { setComeBackLater(!comeBackLater) }}>
@@ -139,6 +170,7 @@ const InfoScreen = ({ navigation }) => {
                 )}
             </TouchableOpacity>
         </ImageBackground >
+
     )
 }
 

@@ -8,35 +8,41 @@
  */
 
 import React from 'react';
-import type {Node} from 'react';
+import type { Node } from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
+    SafeAreaView,
+    ScrollView,
+    StatusBar,
+    StyleSheet,
+    Text,
+    useColorScheme,
+    View,
 } from 'react-native';
 
 import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
+    Colors,
+    DebugInstructions,
+    Header,
+    LearnMoreLinks,
+    ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import InfoScreen from './src/screens/InfoScreen';
-import {NavigationContainer} from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import NavigationScreens from './src/navigations/NavigationScreens';
+import { Provider as ReduxProvider } from 'react-redux'
+import configureStore from './src/redux/store';
+
+const store = configureStore();
 
 const App: () => Node = () => {
-  return (
-    <NavigationContainer>
-      <NavigationScreens />
-    </NavigationContainer>
-    //  <InfoScreen/>
-  );
+    return (
+        <ReduxProvider store={store}>
+            <NavigationContainer>
+                <NavigationScreens />
+            </NavigationContainer>
+        </ReduxProvider>
+        //  <InfoScreen/>
+    );
 };
 
 const styles = StyleSheet.create({});
