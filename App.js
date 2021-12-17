@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -26,23 +27,18 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import InfoScreen from './src/screens/InfoScreen';
-import { NavigationContainer } from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
 import NavigationScreens from './src/navigations/NavigationScreens';
 
 const App: () => Node = () => {
-  
   return (
-  
-<NavigationContainer>
-  <NavigationScreens/>
-</NavigationContainer>
-  //  <InfoScreen/>
-    
+    <NavigationContainer>
+      <NavigationScreens />
+    </NavigationContainer>
+    //  <InfoScreen/>
   );
 };
 
-const styles = StyleSheet.create({
-  
-});
+const styles = StyleSheet.create({});
 
 export default App;

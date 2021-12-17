@@ -1,5 +1,6 @@
+/* eslint-disable prettier/prettier */
 import React from 'react'
-import { StyleSheet, Text, View, Image, Dimensions, ImageBackground, StatusBar } from 'react-native'
+import { StyleSheet, Text, View, Image, Dimensions, ImageBackground, StatusBar, TouchableOpacity } from 'react-native'
 const { width, height } = Dimensions.get('window');
 import bg from '../img/bg.png'
 import logo from '../img/logo.png'
@@ -8,7 +9,7 @@ import altaNoodle from '../img/altaNoodle.png'
 import heart from '../img/heart.png'
 import backHome from '../img/backHome.png'
 import downArrow from '../img/downArrow.png'
-const DoneScreen = () => {
+const DoneScreen = ({navigation}) => {
     return (
         <ImageBackground source={bg} resizeMode='cover' style={styles.container}>
             <StatusBar translucent backgroundColor="transparent" />
@@ -19,7 +20,11 @@ const DoneScreen = () => {
                 <Text style={styles.css_text}>Enjoy your noodles</Text>
                 <Image style={styles.heart} source={heart} />
             </View>
-            <Image style={styles.backHome} source={backHome} />
+            <TouchableOpacity 
+                onPress={()=>navigation.navigate("InfoScreen")}
+            >
+                <Image style={styles.backHome} source={backHome} />
+            </TouchableOpacity>
             <Text style={styles.css_textBelow}>Get them below</Text>
             <Image style={styles.downArrow} source={downArrow} />
         </ImageBackground>
