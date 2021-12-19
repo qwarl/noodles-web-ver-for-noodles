@@ -23,7 +23,7 @@ let NoodlesReducer = (state = defaultState, action) => {
                 ...state.noodles, noodles2: action.payload, remain: state.noodles.remain - 1
             }
             // let countNoodles = { ...state.noodles, noodles1: action.payload, remain: state.noodles.remain - 1 }
-            console.log('visa', noodles)
+            console.log('visa2', noodles)
             return { noodles }
             break;
         case 'SET_NOODLES3':
@@ -31,7 +31,7 @@ let NoodlesReducer = (state = defaultState, action) => {
                 ...state.noodles, noodles3: action.payload, remain: state.noodles.remain - 1
             }
             // let countNoodles = { ...state.noodles, noodles1: action.payload, remain: state.noodles.remain - 1 }
-            console.log('visa', noodles)
+            console.log('visa3', noodles)
             return { noodles }
             break;
         default: return state

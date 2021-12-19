@@ -19,6 +19,7 @@ import { useSelector, useDispatch } from 'react-redux'
 const InfoScreen = ({ navigation }) => {
     const Noodles = useSelector(state => state.NoodlesReducer.noodles);
     console.log('ahaha', Noodles)
+    console.log("_____________________")
 
     const [selectedNoodles1, setSelectedNoodles1] = useState(false)
     const [selectedNoodles2, setSelectedNoodles2] = useState(false)
@@ -52,6 +53,7 @@ const InfoScreen = ({ navigation }) => {
     useEffect(() => {
         getuser();
     }, []);
+
     const setNoodles1 = (noodles) => dispatch({
         type: 'SET_NOODLES1',
         payload: noodles
@@ -66,18 +68,17 @@ const InfoScreen = ({ navigation }) => {
     })
     const dispatch = useDispatch();
 
-    const handleGetNoodles = () => {
+    const handleGetNoodles = async () => {
         //handle redux
         if (selectedNoodles1) {
-            setNoodles1(false)
+            await setNoodles1(false)
         }
         if (selectedNoodles2) {
-            setNoodles1(false)
+            await setNoodles2(false)
         }
         if (selectedNoodles3) {
-            setNoodles1(false)
+            await setNoodles3(false)
         }
-
         navigation.navigate('DoneScreen')
     }
     return (
@@ -122,40 +123,72 @@ const InfoScreen = ({ navigation }) => {
                 </View>
             </ImageBackground>
 
-            {/* ly my khi da het */}
-            <View style={styles.css_unavailableNoodles}>
-                <Image style={styles.unavailableNoodles} source={unavailableNoodles} />
-                <Image style={styles.unavailableNoodles} source={unavailableNoodles} />
-                <Image style={styles.unavailableNoodles} source={unavailableNoodles} />
-            </View>
-            {/* ly my khi con */}
-            <View style={styles.css_noodles}>
-                <TouchableOpacity onPress={() => { setSelectedNoodles1(!selectedNoodles1) }}>
-                    {selectedNoodles1 == true && (
-                        <Image style={styles.hover1} source={hover} />
-                    )}
-                    <Image style={styles.noodles} source={noodles1} />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => { setSelectedNoodles2(!selectedNoodles2) }}>
-                    {selectedNoodles2 == true && (
-                        <Image style={styles.hover1} source={hover} />
-                    )}
-                    <Image style={styles.noodles} source={noodles2} />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => { setSelectedNoodles3(!selectedNoodles3) }}>
-                    {selectedNoodles3 == true && (
-                        <Image style={styles.hover1} source={hover} />
-                    )}
-                    <Image style={styles.noodles} source={noodles3} />
-                </TouchableOpacity>
-            </View>
+            <View style={{ flexDirection: 'row' }}>
+                <View style={{ marginTop: 10, marginLeft: -50 }}>
+                    <View>
+                        {
+                            Noodles.noodles1 ? (
+                                <TouchableOpacity onPress={() => { setSelectedNoodles1(!selectedNoodles1) }}>
+                                    {selectedNoodles1 == true && (
+                                        <Image style={{ width: 80, height: 80, position: 'absolute', marginTop: 30, left: -25 }} source={hover} />
+                                    )}
+                                    <Image style={{ width: 60, height: 120, marginLeft: -17 }} source={noodles1} />
+                                </TouchableOpacity>)
+                                :
+                                (<View>
+                                    <Image style={{ width: 60, height: 120, marginTop: 0, }} source={unavailableNoodles} />
+                                    <Text style={{ fontFamily: 'PaytoneOne-Regular', fontWeight: '400', fontSize: 10, }}>Unavailable</Text>
+                                </View>)
+                        }
+                    </View>
+                </View>
 
-            <View style={styles.unavailableText}>
-                <Text style={styles.css_unavailableText}>Unavailable</Text>
-                <Text style={styles.css_unavailableText}>Unavailable</Text>
-                <Text style={styles.css_unavailableText}>Unavailable</Text>
+                <View style={{ left: 28, marginTop: 10 }}>
+                    <View>
+                        {
+                            Noodles.noodles2 ? (
+                                <TouchableOpacity onPress={() => { setSelectedNoodles2(!selectedNoodles2) }}>
+                                    {selectedNoodles2 == true && (
+                                        <Image style={{ width: 80, height: 80, position: 'absolute', marginTop: 30, left: -3 }} source={hover} />
+                                    )}
+                                    <Image style={{ width: 60, height: 120, left: 5 }} source={noodles1} />
+                                </TouchableOpacity>
+                            ) :
+                                (<View>
+                                    <Image style={{ width: 60, height: 120, marginTop: 0 }} source={unavailableNoodles} />
+                                    <Text style={{ fontFamily: 'PaytoneOne-Regular', fontWeight: '400', fontSize: 10, }}>Unavailable</Text>
+                                </View>)
+                        }
+
+
+                    </View>
+                </View>
+
+                <View style={{ left: 56, marginTop: 10 }}>
+                    <View>
+                        {
+                            Noodles.noodles3 ? (
+                                <TouchableOpacity onPress={() => { setSelectedNoodles3(!selectedNoodles3) }}>
+                                    {selectedNoodles3 == true && (
+                                        <Image style={{ width: 80, height: 80, position: 'absolute', marginTop: 30, left:2 }} source={hover} />
+                                    )}
+                                    <Image style={{ width: 60, height: 120, left: 11 }} source={noodles1} />
+                                </TouchableOpacity>
+                            )
+                                :
+                                (<View>
+                                    <Image style={{ width: 60, height: 120, marginTop: 0 }} source={unavailableNoodles} />
+                                    <Text style={{ fontFamily: 'PaytoneOne-Regular', fontWeight: '400', fontSize: 10, }}>Unavailable</Text>
+                                </View>)
+                        }
+
+
+                    </View>
+                </View>
+
             </View>
-            <View style={{ flexDirection: 'row', marginTop: 8 }}>
+            
+            <View style={{ flexDirection: 'row', marginTop: 12 }}>
                 <Text style={styles.css_number}>
                     {Noodles.remain} </Text>
                 <Text style={styles.css_noti}>cups of noodles left this month</Text>
@@ -283,7 +316,8 @@ const styles = StyleSheet.create({
         width: 280,
         justifyContent: 'space-around',
         position: 'absolute',
-        marginTop: 290,
+        marginTop: 289,
+        left: 55,
     },
     unavailableNoodles: {
         marginTop: 10,
