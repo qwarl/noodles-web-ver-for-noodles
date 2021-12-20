@@ -21,7 +21,7 @@ const DoneScreen = ({navigation}) => {
                 <Image style={styles.heart} source={heart} />
             </View>
             <TouchableOpacity 
-                onPress={()=>navigation.navigate("InfoScreen")}
+                onPress={()=>navigation.navigate("WelcomeScreen")}
             >
                 <Image style={styles.backHome} source={backHome} />
             </TouchableOpacity>

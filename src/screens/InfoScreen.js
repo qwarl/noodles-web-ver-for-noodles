@@ -69,17 +69,24 @@ const InfoScreen = ({ navigation }) => {
     const dispatch = useDispatch();
 
     const handleGetNoodles = async () => {
-        //handle redux
-        if (selectedNoodles1) {
-            await setNoodles1(false)
+        if (!selectedNoodles1 && !selectedNoodles2 && !selectedNoodles3) {
+
+        } else {
+            //handle redux
+            if (selectedNoodles1) {
+                await setNoodles1(false)
+                setSelectedNoodles1(false)
+            }
+            if (selectedNoodles2) {
+                await setNoodles2(false)
+                setSelectedNoodles2(false)
+            }
+            if (selectedNoodles3) {
+                await setNoodles3(false)
+                setSelectedNoodles3(false)
+            }
+            navigation.navigate('DoneScreen')
         }
-        if (selectedNoodles2) {
-            await setNoodles2(false)
-        }
-        if (selectedNoodles3) {
-            await setNoodles3(false)
-        }
-        navigation.navigate('DoneScreen')
     }
     return (
 
@@ -122,7 +129,7 @@ const InfoScreen = ({ navigation }) => {
                     </Text>
                 </View>
             </ImageBackground>
-
+            {/* ly mi 1 */}
             <View style={{ flexDirection: 'row' }}>
                 <View style={{ marginTop: 10, marginLeft: -50 }}>
                     <View>
@@ -142,7 +149,7 @@ const InfoScreen = ({ navigation }) => {
                         }
                     </View>
                 </View>
-
+                {/* ly mi 2 */}
                 <View style={{ left: 28, marginTop: 10 }}>
                     <View>
                         {
@@ -163,14 +170,14 @@ const InfoScreen = ({ navigation }) => {
 
                     </View>
                 </View>
-
+                {/* ly mi 3 */}
                 <View style={{ left: 56, marginTop: 10 }}>
                     <View>
                         {
                             Noodles.noodles3 ? (
                                 <TouchableOpacity onPress={() => { setSelectedNoodles3(!selectedNoodles3) }}>
                                     {selectedNoodles3 == true && (
-                                        <Image style={{ width: 80, height: 80, position: 'absolute', marginTop: 30, left:2 }} source={hover} />
+                                        <Image style={{ width: 80, height: 80, position: 'absolute', marginTop: 30, left: 2 }} source={hover} />
                                     )}
                                     <Image style={{ width: 60, height: 120, left: 11 }} source={noodles1} />
                                 </TouchableOpacity>
@@ -187,21 +194,31 @@ const InfoScreen = ({ navigation }) => {
                 </View>
 
             </View>
-            
-            <View style={{ flexDirection: 'row', marginTop: 12 }}>
+
+            <View style={{ flexDirection: 'row', marginTop: 0 }}>
                 <Text style={styles.css_number}>
                     {Noodles.remain} </Text>
                 <Text style={styles.css_noti}>cups of noodles left this month</Text>
             </View>
 
-            <TouchableOpacity onPress={handleGetNoodles}>
-                <Image style={styles.GetNoodles} source={GetNoodles} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setComeBackLater(!comeBackLater) }}>
-                {comeBackLater == true && (
-                    <Image style={styles.comeLater} source={comeLater} />
-                )}
-            </TouchableOpacity>
+            {/* button get cup of noodles */}
+            {
+                Noodles.remain > 0 &&
+                (
+                    <TouchableOpacity onPress={handleGetNoodles}>
+                        <Image style={styles.GetNoodles} source={GetNoodles} />
+                    </TouchableOpacity>
+                )
+            }
+            {/* button comeback next month when out of noodles  */}
+            {
+                Noodles.remain == 0 &&
+                (
+                    <TouchableOpacity onPress={handleGetNoodles}>
+                        <Image style={styles.GetNoodles} source={comeLater} />
+                    </TouchableOpacity>
+                )
+            }
         </ImageBackground >
 
     )
