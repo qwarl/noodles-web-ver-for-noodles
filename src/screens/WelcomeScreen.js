@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, Image, Dimensions, ImageBackground, StatusBar } from 'react-native'
+import { StyleSheet, Text, View, Image, Dimensions, ImageBackground, StatusBar, Linking } from 'react-native'
 import bg from '../img/bg.png'
 import logo from '../img/logo.png'
 import welcome from '../img/welcome.png'
@@ -8,9 +8,17 @@ import scan from '../img/Scan.png'
 import card from '../img/Card.png'
 import arrow from '../img/Arrow.png'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import QRCodeScanner from 'react-native-qrcode-scanner';
+import { RNCamera } from 'react-native-camera';
+// import Video from 'react-native-video'
 const { width, height } = Dimensions.get('window');
 
 const WelcomeScreen = ({ navigation }) => {
+    onSuccess = e => {
+        Linking.openURL(e.data).catch(err =>
+            console.error('An error occured', err)
+        );
+    };
     return (
         <ImageBackground source={bg} resizeMode='cover' style={styles.container}>
             <StatusBar translucent backgroundColor="transparent" />
@@ -19,16 +27,23 @@ const WelcomeScreen = ({ navigation }) => {
             <View style={styles.frameVideo}>
                 <View style={styles.frameBrown}>
                     <View style={styles.frameYellow}>
-
+                        {/* <Video source={require('../video/vid.mp4')}
+                        style={{width:'100%',height:'100%'}}
+                        /> */}
                     </View>
                 </View>
             </View>
             <Image style={styles.scan} source={scan} />
             <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 65, marginLeft: 45 }}>
-                <Image style={styles.card} source={card} />
-                <TouchableOpacity style={{ marginLeft: 40 }} onPress={() => navigation.navigate('InfoScreen')}>
+                <QRCodeScanner
+                    cameraStyle={{ width: 87, height: 108 }}
+                    onRead={onSuccess}
+                    // flashMode={RNCamera.Constants.FlashMode.torch}
+                    
+                />
+                {/* <TouchableOpacity style={{ marginLeft: 40 }} onPress={() => navigation.navigate('InfoScreen')}>
                     <Image style={styles.arrow} source={arrow} />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </View>
         </ImageBackground>
     )
