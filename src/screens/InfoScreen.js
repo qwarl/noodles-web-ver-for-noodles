@@ -13,10 +13,10 @@ import avatar from '../img/Rosamundpike.jpg'
 import hover from '../img/hover.png'
 import unavailableNoodles from '../img/unavailableNoodles.png'
 import comeLater from '../img/comeLater.png'
-import firebase from '../firebase/firebase'
 import { useSelector, useDispatch } from 'react-redux'
 
-const InfoScreen = ({ navigation }) => {
+const InfoScreen = ({ navigation, route }) => {
+    console.log('route', route)
     const Noodles = useSelector(state => state.NoodlesReducer.noodles);
     console.log('ahaha', Noodles)
     console.log("_____________________")
@@ -26,33 +26,33 @@ const InfoScreen = ({ navigation }) => {
     const [selectedNoodles3, setSelectedNoodles3] = useState(false)
     const [comeBackLater, setComeBackLater] = useState(false)
 
-    //firebase
-    const [data, setData] = useState([]);
-    const getuser = async () => {
-        await firebase
-            .database()
-            .ref()
-            .child('noodles')
-            .on('value', snapshot => {
-                const infor = [];
-                snapshot.forEach(child => {
-                    let information = {
-                        fullname: child.val().FullName,
-                        birthday: child.val().Birthday,
-                        gender: child.val().Gender,
-                        department: child.val().Department,
-                    };
-                    infor.push(information);
-                    // setData([1, 2, 3]);
-                });
-                setData(infor[1]);
-                console.log('data', data);
-            });
-    };
+    // //firebase
+    const [data, setData] = useState(route.params);
+    // const getuser = async () => {
+    //     await firebase
+    //         .database()
+    //         .ref()
+    //         .child('noodles')
+    //         .on('value', snapshot => {
+    //             const infor = [];
+    //             snapshot.forEach(child => {
+    //                 let information = {
+    //                     fullname: child.val().FullName,
+    //                     birthday: child.val().Birthday,
+    //                     gender: child.val().Gender,
+    //                     department: child.val().Department,
+    //                 };
+    //                 infor.push(information);
+    //                 // setData([1, 2, 3]);
+    //             });
+    //             setData(infor[1]);
+    //             console.log('data', data);
+    //         });
+    // };
 
-    useEffect(() => {
-        getuser();
-    }, []);
+    // useEffect(() => {
+    //     getuser();
+    // }, []);
 
     const setNoodles1 = (noodles) => dispatch({
         type: 'SET_NOODLES1',
@@ -112,20 +112,20 @@ const InfoScreen = ({ navigation }) => {
                 </View>
                 <View style={styles.css_viewFill}>
                     <Text style={styles.css_textFill}>
-                        {data.fullname}
+                        {data.FullName}
                         {/* Alice Mie */}
                     </Text>
                     <Text style={styles.css_textFill}>
                         {/* 12/10/1999 */}
-                        {data.birthday}
+                        {data.Birthday}
                     </Text>
                     <Text style={styles.css_textFill}>
                         {/* Female */}
-                        {data.gender}
+                        {data.Gender}
                     </Text>
                     <Text style={styles.css_textFill}>
                         {/* Design */}
-                        {data.department}
+                        {data.Department}
                     </Text>
                 </View>
             </ImageBackground>

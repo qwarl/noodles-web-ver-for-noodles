@@ -10,14 +10,74 @@ import arrow from '../img/Arrow.png'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';
+import firebase from '../firebase/firebase'
+
 // import Video from 'react-native-video'
 const { width, height } = Dimensions.get('window');
 
 const WelcomeScreen = ({ navigation }) => {
+
+    //firebase
+    const [user, setUser] = useState([]);
+    const getuser = async () => {
+        await firebase
+            .database()
+            .ref()
+            .child('noodles')
+            .on('value', snapshot => {
+                const infor = [];
+                snapshot.forEach(child => {
+                    let information = {
+                        FullName: child.val().FullName,
+                        Birthday: child.val().Birthday,
+                        Gender: child.val().Gender,
+                        Department: child.val().Department,
+                        Id: child.val().Id,
+
+                    };
+                    infor.push(information);
+                    // setData([1, 2, 3]);
+                });
+                setUser(infor);
+                // console.log('data', data);
+                console.log('hihihi', infor)
+            });
+    };
+
+    useEffect(() => {
+        getuser();
+    }, []);
+
     onSuccess = e => {
-        Linking.openURL(e.data).catch(err =>
-            console.error('An error occured', err)
-        );
+        // Linking.openURL(e.data).catch(err =>
+        //     console.error('An error occured', err),
+        //     console.log('hmhmhm', e.data)
+        // console.log('dfsf', e.data)
+
+        // data.(user => {
+        //     // let vur=e.data
+        //     // console.log(JSON.stringify(user));
+        //     // console.log(JSON.stringify(vur));
+        //     // // vur=vur.replace(/\\/g, '');
+        //     console.log(`${user.Id},${e.data}`, user.Id==e.data);
+        //     console.log('thth:',user.Id==e.data)
+        //     if (user.Id==e.data) {
+        //         navigation.navigate('InfoScreen',user)
+        //         // return true;
+        //     }else{
+        //         navigation.navigate('ErrorScreen')
+        //     }
+        // });
+        for (let index = 0; index < user.length; index++) {
+            // const element = data[index];
+            if (user[index].Id == e.data) {
+                navigation.navigate('InfoScreen', user[index])
+                return;
+            } else {
+                navigation.navigate('ErrorScreen')
+            }
+        }
+        // );
     };
     return (
         <ImageBackground source={bg} resizeMode='cover' style={styles.container}>
@@ -38,8 +98,8 @@ const WelcomeScreen = ({ navigation }) => {
                 <QRCodeScanner
                     cameraStyle={{ width: 87, height: 108 }}
                     onRead={onSuccess}
-                    // flashMode={RNCamera.Constants.FlashMode.torch}
-                    
+                // flashMode={RNCamera.Constants.FlashMode.torch}
+
                 />
                 {/* <TouchableOpacity style={{ marginLeft: 40 }} onPress={() => navigation.navigate('InfoScreen')}>
                     <Image style={styles.arrow} source={arrow} />

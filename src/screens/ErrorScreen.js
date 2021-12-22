@@ -8,7 +8,7 @@ import scan from '../img/Scan.png'
 import card from '../img/Card.png'
 import arrow from '../img/Arrow.png'
 
-const ErrorScreen = () => {
+const ErrorScreen = ({navigation}) => {
     return (
         <ImageBackground source={bg} resizeMode='cover' style={styles.container}>
             <Image style={styles.logo} source={logo} />
