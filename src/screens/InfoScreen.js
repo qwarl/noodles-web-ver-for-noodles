@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable prettier/prettier */
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, Image, Dimensions, ImageBackground, StatusBar, TouchableOpacity, SafeAreaView } from 'react-native'
 const { width, height } = Dimensions.get('window');
@@ -16,9 +18,9 @@ import comeLater from '../img/comeLater.png'
 import { useSelector, useDispatch } from 'react-redux'
 
 const InfoScreen = ({ navigation, route }) => {
-    console.log('route', route)
+    console.log('route', route.params)
     const Noodles = useSelector(state => state.NoodlesReducer.noodles);
-    console.log('ahaha', Noodles)
+    // console.log('ahaha', Noodles)
     console.log("_____________________")
 
     const [selectedNoodles1, setSelectedNoodles1] = useState(false)

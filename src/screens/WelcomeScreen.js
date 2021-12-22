@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable prettier/prettier */
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, Image, Dimensions, ImageBackground, StatusBar, Linking } from 'react-native'
 import bg from '../img/bg.png'
@@ -33,6 +35,9 @@ const WelcomeScreen = ({ navigation }) => {
                         Gender: child.val().Gender,
                         Department: child.val().Department,
                         Id: child.val().Id,
+                        Noodles1: child.val().Noodles1,
+                        Noodles2: child.val().Noodles2,
+                        Noodles3: child.val().Noodles3,
 
                     };
                     infor.push(information);

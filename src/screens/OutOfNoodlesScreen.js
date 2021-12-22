@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from 'react'
 import { StyleSheet, Text, View, Image, Dimensions, ImageBackground, StatusBar } from 'react-native'
 const { width, height } = Dimensions.get('window');
