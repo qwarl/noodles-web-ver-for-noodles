@@ -9,6 +9,20 @@ let defaultState = {
 
 let NoodlesReducer = (state = defaultState, action) => {
     switch (action.type) {
+        case 'SET_NOODLES':
+            // console.log('paypal', state.noodles.remain-1)
+            console.log(action.payload.noodles2);
+            noodles = {
+                ...state.noodles, 
+                noodles1: action.payload.noodles1, 
+                noodles2:action.payload.noodles2,
+                noodles3:action.payload.noodles3,
+                // remain: state.noodles.remain - 1
+            }
+            // let countNoodles = { ...state.noodles, noodles1: action.payload, remain: state.noodles.remain - 1 }
+            console.log('visa', noodles)
+            return { noodles }
+            break;
         case 'SET_NOODLES1':
             // console.log('paypal', state.noodles.remain-1)
             noodles = {

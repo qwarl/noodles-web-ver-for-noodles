@@ -50,10 +50,18 @@ const InfoScreen = ({ navigation, route }) => {
     //         });
     // };
 
-    // useEffect(() => {
-    //     getuser();
-    // }, []);
+    useEffect(() => {
+        setNoodles({
+            noodles1: route.params.Noodles1,
+            noodles2: route.params.Noodles2,
+            noodles3: route.params.Noodles3,
+        });
+    }, []);
 
+    const setNoodles = (noodles) => dispatch({
+        type: 'SET_NOODLES',
+        payload: noodles
+    })
     const setNoodles1 = (noodles) => dispatch({
         type: 'SET_NOODLES1',
         payload: noodles
