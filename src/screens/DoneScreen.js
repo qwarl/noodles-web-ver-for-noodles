@@ -44,13 +44,13 @@ const styles = StyleSheet.create({
     logo: {
         width: 90,
         height: 70,
-        marginTop: 25,
+        marginTop: 45,
     },
     css_screenText: {
         fontFamily: 'SVN-Nexa Rust Slab Black Shadow',
         color: '#C71A1A',
         fontSize: 30,
-        marginTop: 5,
+        marginTop: 10,
     },
     altaNoodle: {
         width: 166,
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
         fontStyle: 'normal',
         fontWeight: 'normal',
         color: '#C71A1A',
-        marginTop: 5,
+        marginTop: 12,
     },
     heart: {
         width: 19,

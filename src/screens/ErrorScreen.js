@@ -7,6 +7,10 @@ import error from '../img/error.png'
 import scan from '../img/Scan.png'
 import card from '../img/Card.png'
 import arrow from '../img/Arrow.png'
+import QRCodeScanner from 'react-native-qrcode-scanner';
+import { RNCamera } from 'react-native-camera';
+import firebase from '../firebase/firebase'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 const ErrorScreen = ({navigation}) => {
     return (
@@ -23,8 +27,21 @@ const ErrorScreen = ({navigation}) => {
             </View>
             <Image style={styles.error} source={error} />
             <Image style={styles.scan} source={scan} />
-            <Image style={styles.card} source={card} />
-            <Image style={styles.arrow} source={arrow} />
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 55 }}>
+                <QRCodeScanner
+                    ref={(node) => {
+                        if (node) {
+                            node.reactivate()
+                        }
+                    }}
+                    cameraStyle={{ width: 87, height: 108, marginLeft: 70 }}
+                    onRead={onSuccess}
+                // flashMode={RNCamera.Constants.FlashMode.torch}
+                />
+                <TouchableOpacity >
+                    <Image style={styles.arrow} source={arrow} />
+                </TouchableOpacity>
+            </View>
 
         </ImageBackground>
     )
@@ -41,13 +58,13 @@ const styles = StyleSheet.create({
     logo: {
         width: 90,
         height: 70,
-        marginTop: 25,
+        marginTop: 45,
     },
     css_screenText: {
         fontFamily: 'SVN-Nexa Rust Slab Black Shadow',
         color: '#C71A1A',
         fontSize: 30,
-        marginTop: 15,
+        marginTop: 10,
     },
     css_p: {
         fontFamily: 'Nunito-Regular',
@@ -73,12 +90,12 @@ const styles = StyleSheet.create({
     error: {
         width: 108,
         height: 130,
-        marginTop: 15,
+        marginTop: 35,
     },
     scan: {
         width: 270,
         height: 30,
-        marginTop: 10,
+        marginTop: 15,
     },
     card: {
         width: 87,

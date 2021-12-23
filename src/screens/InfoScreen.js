@@ -30,27 +30,6 @@ const InfoScreen = ({ navigation, route }) => {
 
     // //firebase
     const [data, setData] = useState(route.params);
-    // const getuser = async () => {
-    //     await firebase
-    //         .database()
-    //         .ref()
-    //         .child('noodles')
-    //         .on('value', snapshot => {
-    //             const infor = [];
-    //             snapshot.forEach(child => {
-    //                 let information = {
-    //                     fullname: child.val().FullName,
-    //                     birthday: child.val().Birthday,
-    //                     gender: child.val().Gender,
-    //                     department: child.val().Department,
-    //                 };
-    //                 infor.push(information);
-    //                 // setData([1, 2, 3]);
-    //             });
-    //             setData(infor[1]);
-    //             console.log('data', data);
-    //         });
-    // };
 
     useEffect(() => {
         setNoodles({
@@ -181,7 +160,7 @@ const InfoScreen = ({ navigation, route }) => {
                     </View>
                 </View>
                 {/* ly mi 3 */}
-                <View style={{ left: 56, marginTop: 10 }}>
+                <View style={{ left: 56, marginTop: 10, minHeight: 140 }}>
                     <View>
                         {
                             Noodles.noodles3 ? (
@@ -246,7 +225,7 @@ const styles = StyleSheet.create({
     image: {
         width: 90,
         height: 70,
-        marginTop: 25,
+        marginTop: 45,
     },
     css_screenText: {
         fontFamily: 'SVN-Nexa Rust Slab Black Shadow',

@@ -54,25 +54,7 @@ const WelcomeScreen = ({ navigation }) => {
     }, []);
 
     onSuccess = e => {
-        // Linking.openURL(e.data).catch(err =>
-        //     console.error('An error occured', err),
-        //     console.log('hmhmhm', e.data)
-        // console.log('dfsf', e.data)
 
-        // data.(user => {
-        //     // let vur=e.data
-        //     // console.log(JSON.stringify(user));
-        //     // console.log(JSON.stringify(vur));
-        //     // // vur=vur.replace(/\\/g, '');
-        //     console.log(`${user.Id},${e.data}`, user.Id==e.data);
-        //     console.log('thth:',user.Id==e.data)
-        //     if (user.Id==e.data) {
-        //         navigation.navigate('InfoScreen',user)
-        //         // return true;
-        //     }else{
-        //         navigation.navigate('ErrorScreen')
-        //     }
-        // });
         for (let index = 0; index < user.length; index++) {
             // const element = data[index];
             if (user[index].Id == e.data) {
@@ -99,16 +81,17 @@ const WelcomeScreen = ({ navigation }) => {
                 </View>
             </View>
             <Image style={styles.scan} source={scan} />
-            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 65, marginLeft: 45 }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 55 }}>
+                
                 <QRCodeScanner
-                    cameraStyle={{ width: 87, height: 108 }}
+
+                    cameraStyle={{ width: 87, height: 108, marginLeft: 70 }}
                     onRead={onSuccess}
                 // flashMode={RNCamera.Constants.FlashMode.torch}
-
                 />
-                {/* <TouchableOpacity style={{ marginLeft: 40 }} onPress={() => navigation.navigate('InfoScreen')}>
+                <TouchableOpacity >
                     <Image style={styles.arrow} source={arrow} />
-                </TouchableOpacity> */}
+                </TouchableOpacity>
             </View>
         </ImageBackground>
     )
@@ -126,42 +109,33 @@ const styles = StyleSheet.create({
     logo: {
         width: 90,
         height: 70,
-        marginTop: 25,
+        marginTop: 45,
     },
     css_screenText: {
         fontFamily: 'SVN-Nexa Rust Slab Black Shadow',
         color: '#C71A1A',
         fontSize: 30,
-        marginTop: 5,
-    },
-    frame: {
-        width: 290,
-        height: 170,
-        marginTop: 25,
+        marginTop: 10,
     },
     scan: {
         width: 270,
         height: 30,
-        marginTop: 40,
-    },
-    card: {
-        width: 87,
-        height: 108,
-        marginLeft: 70,
-        // marginTop: 55,
-
+        marginTop: 45,
     },
     arrow: {
         // backgroundColor:'black',
-        width: 55,
-        height: 30,
-        // top: -15,
-        // position:'absolute'
+        width: 65,
+        height: 40,
+        // marginLeft: 10,
+        marginRight: 20
+        // top:-20,
+        // marginBottom: 30,
+        // backgroundColor: 'blue',
     },
     frameVideo: {
-        width: 290,
+        width: 250,
         height: 170,
-        marginTop: 25,
+        marginTop: 40,
         // borderColor:'white',
         backgroundColor: 'white',
         borderRadius: 10,
