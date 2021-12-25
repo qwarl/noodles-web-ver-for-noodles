@@ -13,6 +13,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';
 import firebase from '../firebase/firebase'
+import Video from 'react-native-video';
 
 // import Video from 'react-native-video'
 const { width, height } = Dimensions.get('window');
@@ -74,17 +75,25 @@ const WelcomeScreen = ({ navigation }) => {
             <View style={styles.frameVideo}>
                 <View style={styles.frameBrown}>
                     <View style={styles.frameYellow}>
-                        {/* <Video source={require('../video/vid.mp4')}
-                        style={{width:'100%',height:'100%'}}
-                        /> */}
+                        <Video source={require('../video/vid.mp4')}
+                            style={{ width: '100%', height: '100%' }}
+                            controls
+                            repeat
+                            hideShutterView={false}
+                            resizeMode="stretch"
+                        />
                     </View>
                 </View>
             </View>
             <Image style={styles.scan} source={scan} />
             <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 55 }}>
-                
-                <QRCodeScanner
 
+                <QRCodeScanner
+                    ref={(node) => {
+                        if (node) {
+                            node.reactivate()
+                        }
+                    }}
                     cameraStyle={{ width: 87, height: 108, marginLeft: 70 }}
                     onRead={onSuccess}
                 // flashMode={RNCamera.Constants.FlashMode.torch}
