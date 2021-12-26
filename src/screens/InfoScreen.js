@@ -2,7 +2,6 @@
 /* eslint-disable prettier/prettier */
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, Image, Dimensions, ImageBackground, StatusBar, TouchableOpacity, SafeAreaView } from 'react-native'
-const { width, height } = Dimensions.get('window');
 import bg from '../img/bg.png'
 import logo from '../img/logo.png'
 import frameInfo from '../img/FrameInfo.png'
@@ -16,6 +15,9 @@ import hover from '../img/hover.png'
 import unavailableNoodles from '../img/unavailableNoodles.png'
 import comeLater from '../img/comeLater.png'
 import { useSelector, useDispatch } from 'react-redux'
+// import database from '@react-native-firebase/database'
+import firebase from '../firebase/firebase'
+const { width, height } = Dimensions.get('window');
 
 const InfoScreen = ({ navigation, route }) => {
     console.log('route', route.params)
@@ -27,6 +29,8 @@ const InfoScreen = ({ navigation, route }) => {
     const [selectedNoodles2, setSelectedNoodles2] = useState(false)
     const [selectedNoodles3, setSelectedNoodles3] = useState(false)
     const [comeBackLater, setComeBackLater] = useState(false)
+
+
 
     // //firebase
     const [data, setData] = useState(route.params);
@@ -76,6 +80,22 @@ const InfoScreen = ({ navigation, route }) => {
             }
             navigation.navigate('DoneScreen')
         }
+    }
+    //update trang thai ly mi
+    const handleUpdateStatusOfNoodles = async () => {
+        await firebase
+            .database()
+            .ref()
+            .child('noodles')
+            .child(route.params.Id)
+            .update({
+                Noodles1: selectedNoodles1? !selectedNoodles1 : route.params.Noodles1,
+                Noodles2: selectedNoodles2? !selectedNoodles2 : route.params.Noodles2,
+                Noodles3: selectedNoodles3? !selectedNoodles3 : route.params.Noodles3,
+            })
+            .then(() => {
+                console.log('update success');
+            })
     }
     return (
 
@@ -194,7 +214,7 @@ const InfoScreen = ({ navigation, route }) => {
             {
                 Noodles.remain > 0 &&
                 (
-                    <TouchableOpacity onPress={handleGetNoodles}>
+                    <TouchableOpacity onPress={handleUpdateStatusOfNoodles}>
                         <Image style={styles.GetNoodles} source={GetNoodles} />
                     </TouchableOpacity>
                 )

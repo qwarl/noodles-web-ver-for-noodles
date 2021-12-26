@@ -94,6 +94,7 @@ const WelcomeScreen = ({ navigation }) => {
                             node.reactivate()
                         }
                     }}
+                    cameraType='back'
                     cameraStyle={{ width: 87, height: 108, marginLeft: 70 }}
                     onRead={onSuccess}
                 // flashMode={RNCamera.Constants.FlashMode.torch}
