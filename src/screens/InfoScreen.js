@@ -19,7 +19,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import firebase from '../firebase/firebase'
 const { width, height } = Dimensions.get('window');
 
-const InfoScreen = ({ navigation, route }) => {
+const InfoScreen = ({props, route }) => {
     console.log('route', route.params)
     const Noodles = useSelector(state => state.NoodlesReducer.noodles);
     // console.log('ahaha', Noodles)
@@ -78,7 +78,7 @@ const InfoScreen = ({ navigation, route }) => {
                 await setNoodles3(false)
                 setSelectedNoodles3(false)
             }
-            navigation.navigate('DoneScreen')
+            props.navigation.navigate('DoneScreen')
         }
     }
     //update trang thai ly mi

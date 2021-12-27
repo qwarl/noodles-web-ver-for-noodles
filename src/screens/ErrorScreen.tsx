@@ -1,18 +1,68 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, Image, Dimensions, ImageBackground, StatusBar } from 'react-native'
 const { width, height } = Dimensions.get('window');
-import bg from '../img/bg.png'
-import logo from '../img/logo.png'
-import error from '../img/error.png'
-import scan from '../img/Scan.png'
-import card from '../img/Card.png'
-import arrow from '../img/Arrow.png'
+const bg = require('../img/bg.png')
+const logo = require('../img/logo.png')
+const error = require('../img/error.png')
+const scan = require('../img/scan.png')
+const arrow = require('../img/arrow.png')
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';
 import firebase from '../firebase/firebase'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+// import { useNavigation } from '@react-navigation/native';
+// import { useNavigation } from '@react-navigation/core';
+
 
 const ErrorScreen = ({navigation}) => {
+    // const navigation = useNavigation();
+    //firebase
+    const [user, setUser] = useState<any>([]);
+    const getuser = async () => {
+        await firebase
+            .database()
+            .ref()
+            .child('noodles')
+            .on('value', snapshot => {
+                var infor:any[] = [];
+                snapshot.forEach(child => {
+                    let information = {
+                        FullName: child.val().FullName,
+                        Birthday: child.val().Birthday,
+                        Gender: child.val().Gender,
+                        Department: child.val().Department,
+                        Id: child.val().Id,
+                        Noodles1: child.val().Noodles1,
+                        Noodles2: child.val().Noodles2,
+                        Noodles3: child.val().Noodles3,
+
+                    };
+                    infor.push(information);
+                    // setData([1, 2, 3]);
+                });
+                setUser(infor);
+                // console.log('data', data);
+                console.log('hihihi', infor)
+            });
+    };
+
+    useEffect(() => {
+        getuser();
+    }, []);
+
+    const onSuccess = (e: { data: any; }) => {
+
+        for (let index = 0; index < user.length; index++) {
+            // const element = data[index];
+            if (user[index].Id == e.data) {
+                navigation.navigate('InfoScreen', user[index])
+                return;
+            } else {
+                navigation.navigate('ErrorScreen')
+            }
+        }
+        // );
+    };
     return (
         <ImageBackground source={bg} resizeMode='cover' style={styles.container}>
             <Image style={styles.logo} source={logo} />

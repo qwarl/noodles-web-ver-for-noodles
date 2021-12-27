@@ -1,15 +1,22 @@
 /* eslint-disable prettier/prettier */
-import React from 'react'
+import React, { FC, useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, ImageBackground, StatusBar, TouchableOpacity } from 'react-native'
 const { width, height } = Dimensions.get('window');
-import bg from '../img/bg.png'
-import logo from '../img/logo.png'
-import Done from '../img/Done.png'
-import altaNoodle from '../img/altaNoodle.png'
-import heart from '../img/heart.png'
-import backHome from '../img/backHome.png'
-import downArrow from '../img/downArrow.png'
-const DoneScreen = ({navigation}) => {
+const bg =require( '../img/bg.png')
+const logo =require( '../img/logo.png')
+const Done =require( '../img/Done.png')
+const altaNoodle =require( '../img/altaNoodle.png')
+const heart =require( '../img/heart.png')
+const backHome =require( '../img/backHome.png')
+const downArrow =require( '../img/downArrow.png')
+import { StackNavigationProp } from '@react-navigation/stack';
+import {RootStackParams} from '../navigations/RootStackParams'
+import { StackActions, useNavigation } from '@react-navigation/native';
+
+type authScreenProp = StackNavigationProp<RootStackParams, 'WelcomeScreen'>;
+
+const DoneScreen:  FC = () => {
+    const navigation = useNavigation<authScreenProp>();
     return (
         <ImageBackground source={bg} resizeMode='cover' style={styles.container}>
             <StatusBar translucent backgroundColor="transparent" />
@@ -21,7 +28,7 @@ const DoneScreen = ({navigation}) => {
                 <Image style={styles.heart} source={heart} />
             </View>
             <TouchableOpacity 
-                onPress={()=>navigation.navigate("WelcomeScreen")}
+                onPress={() => navigation.navigate('WelcomeScreen')}
             >
                 <Image style={styles.backHome} source={backHome} />
             </TouchableOpacity>

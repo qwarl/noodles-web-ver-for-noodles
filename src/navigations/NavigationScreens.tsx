@@ -14,10 +14,10 @@ const NavigationScreens = () => {
     }
     return (
         <Stack.Navigator initialRouteName='WelcomeScreen' screenOptions={screenOptions}>
-            <Stack.Screen name='InfoScreen' component={InfoScreen} screenOptions={screenOptions} />
-            <Stack.Screen name='DoneScreen' component={DoneScreen} screenOptions={screenOptions} />
-            <Stack.Screen name='WelcomeScreen' component={WelcomeScreen} screenOptions={screenOptions} />
-            <Stack.Screen name='ErrorScreen' component={ErrorScreen} screenOptions={screenOptions} />
+            <Stack.Screen name='InfoScreen' component={InfoScreen}  />
+            <Stack.Screen name='DoneScreen' component={DoneScreen}  />
+            <Stack.Screen name='WelcomeScreen' component={WelcomeScreen} />
+            <Stack.Screen name='ErrorScreen' component={ErrorScreen}  />
         </Stack.Navigator>
     )
 }
