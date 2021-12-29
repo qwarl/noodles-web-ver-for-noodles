@@ -2,9 +2,9 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image, Dimensions, ImageBackground, StatusBar } from 'react-native'
 const { width, height } = Dimensions.get('window');
-import bg from '../img/bg.png'
-import logo from '../img/logo.png'
-import outOfNoodles from '../img/outOfNoodles.png'
+const bg = require('../img/bg.png')
+const logo = require('../img/logo.png')
+const outOfNoodles = require('../img/outOfNoodles.png')
 const OutOfNoodlesScreen = () => {
     return (
         <ImageBackground source={bg} resizeMode='cover' style={styles.container}>

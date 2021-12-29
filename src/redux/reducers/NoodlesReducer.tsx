@@ -1,12 +1,4 @@
-/* eslint-disable keyword-spacing */
-/* eslint-disable space-infix-ops */
-/* eslint-disable eqeqeq */
-/* eslint-disable prettier/prettier */
-/* eslint-disable no-trailing-spaces */
-/* eslint-disable prettier/prettier */
-/* eslint-disable no-unreachable */
-/* eslint-disable no-undef */
-/* eslint-disable prettier/prettier */
+
 let defaultState = {
     noodles: {
         noodles1: true,
@@ -16,26 +8,26 @@ let defaultState = {
     }
 }
 
-let NoodlesReducer = (state = defaultState, action) => {
+let NoodlesReducer = (state = defaultState, action: any) => {
     switch (action.type) {
         case 'SET_NOODLES':
             // console.log('paypal', state.noodles.remain-1)
             // console.log("thong: ",action.payload);
-            let remain=0;
-            if(action.payload.noodles1==true){
-                remain+=1;
+            let remain = 0;
+            if (action.payload.noodles1 == true) {
+                remain += 1;
             }
-            if(action.payload.noodles2==true){
-                remain+=1;
+            if (action.payload.noodles2 == true) {
+                remain += 1;
             }
-            if(action.payload.noodles3==true){
-                remain+=1;
+            if (action.payload.noodles3 == true) {
+                remain += 1;
             }
-            noodles = {
-                ...state.noodles, 
-                noodles1: action.payload.noodles1, 
-                noodles2:action.payload.noodles2,
-                noodles3:action.payload.noodles3,
+            let noodles = {
+                ...state.noodles,
+                noodles1: action.payload.noodles1,
+                noodles2: action.payload.noodles2,
+                noodles3: action.payload.noodles3,
                 remain: remain
             }
             // let countNoodles = { ...state.noodles, noodles1: action.payload, remain: state.noodles.remain - 1 }

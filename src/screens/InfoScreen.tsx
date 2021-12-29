@@ -2,24 +2,26 @@
 /* eslint-disable prettier/prettier */
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, Image, Dimensions, ImageBackground, StatusBar, TouchableOpacity, SafeAreaView } from 'react-native'
-import bg from '../img/bg.png'
-import logo from '../img/logo.png'
-import frameInfo from '../img/FrameInfo.png'
-import noodles2 from '../img/noodles2.png'
-import noodles3 from '../img/noodles3.png'
-import noodles1 from '../img/noodles1.png'
-import _3CupsLeft from '../img/3CupsLeft.png'
-import GetNoodles from '../img/GetNoodles.png'
-import avatar from '../img/Rosamundpike.jpg'
-import hover from '../img/hover.png'
-import unavailableNoodles from '../img/unavailableNoodles.png'
-import comeLater from '../img/comeLater.png'
+const bg = require('../img/bg.png')
+const logo = require('../img/logo.png')
+const frameInfo = require('../img/frameInfo.png')
+const noodles2 = require('../img/noodles2.png')
+const noodles3 = require('../img/noodles3.png')
+const noodles1 = require('../img/noodles1.png')
+const _3CupsLeft = require('../img/3CupsLeft.png')
+const GetNoodles = require('../img/GetNoodles.png')
+const avatar = require('../img/avatar.png')
+const hover = require('../img/hover.png')
+const unavailableNoodles = require('../img/unavailableNoodles.png')
+const comeLater = require('../img/comeLater.png')
 import { useSelector, useDispatch } from 'react-redux'
 // import database from '@react-native-firebase/database'
 import firebase from '../firebase/firebase'
 const { width, height } = Dimensions.get('window');
 
-const InfoScreen = ({props, route }) => {
+const InfoScreen = (props: { route: any }) => {
+    // const this.route=route.params
+    const {route} = props
     console.log('route', route.params)
     const Noodles = useSelector(state => state.NoodlesReducer.noodles);
     // console.log('ahaha', Noodles)
@@ -43,19 +45,19 @@ const InfoScreen = ({props, route }) => {
         });
     }, []);
 
-    const setNoodles = (noodles) => dispatch({
+    const setNoodles = (noodles: any) => dispatch({
         type: 'SET_NOODLES',
         payload: noodles
     })
-    const setNoodles1 = (noodles) => dispatch({
+    const setNoodles1 = (noodles: any) => dispatch({
         type: 'SET_NOODLES1',
         payload: noodles
     })
-    const setNoodles2 = (noodles) => dispatch({
+    const setNoodles2 = (noodles: any) => dispatch({
         type: 'SET_NOODLES2',
         payload: noodles
     })
-    const setNoodles3 = (noodles) => dispatch({
+    const setNoodles3 = (noodles: any) => dispatch({
         type: 'SET_NOODLES3',
         payload: noodles
     })
@@ -78,7 +80,7 @@ const InfoScreen = ({props, route }) => {
                 await setNoodles3(false)
                 setSelectedNoodles3(false)
             }
-            props.navigation.navigate('DoneScreen')
+            navigation.navigate('DoneScreen')
         }
     }
     //update trang thai ly mi
@@ -89,9 +91,9 @@ const InfoScreen = ({props, route }) => {
             .child('noodles')
             .child(route.params.Id)
             .update({
-                Noodles1: selectedNoodles1? !selectedNoodles1 : route.params.Noodles1,
-                Noodles2: selectedNoodles2? !selectedNoodles2 : route.params.Noodles2,
-                Noodles3: selectedNoodles3? !selectedNoodles3 : route.params.Noodles3,
+                Noodles1: selectedNoodles1 ? !selectedNoodles1 : route.params.Noodles1,
+                Noodles2: selectedNoodles2 ? !selectedNoodles2 : route.params.Noodles2,
+                Noodles3: selectedNoodles3 ? !selectedNoodles3 : route.params.Noodles3,
             })
             .then(() => {
                 console.log('update success');
@@ -99,7 +101,7 @@ const InfoScreen = ({props, route }) => {
     }
     return (
 
-        <ImageBackground ImageBackground source={bg} resizeMode='cover' style={styles.container} >
+        <ImageBackground source={bg} resizeMode='cover' style={styles.container} >
             <StatusBar translucent backgroundColor="transparent" />
             <Image style={styles.image} source={logo} />
             <Text style={styles.css_screenText}>INFORMATION</Text>

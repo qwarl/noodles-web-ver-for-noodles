@@ -6,11 +6,11 @@
 
 // export const Store = createStore(rootReducer, applyMiddleware(thunk));
 
-import { createStore } from "redux";
+import { createStore, StoreEnhancer } from "redux";
 
 import reducer from './reducers'
 
-export default function configureStore(initialState){
+export default function configureStore(initialState:any){
     const store= createStore(reducer, initialState)
     return store;
 }
