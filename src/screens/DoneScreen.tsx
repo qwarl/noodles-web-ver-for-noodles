@@ -11,7 +11,7 @@ const backHome =require( '../img/backHome.png')
 const downArrow =require( '../img/downArrow.png')
 import { StackNavigationProp } from '@react-navigation/stack';
 import {RootStackParams} from '../navigations/RootStackParams'
-import { StackActions, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 type authScreenProp = StackNavigationProp<RootStackParams, 'WelcomeScreen'>;
 

@@ -2,33 +2,32 @@
 /* eslint-disable prettier/prettier */
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, Image, Dimensions, ImageBackground, StatusBar, Linking } from 'react-native'
-import bg from '../img/bg.png'
-import logo from '../img/logo.png'
-import welcome from '../img/welcome.png'
-import frame from '../img/Frame.png'
-import scan from '../img/Scan.png'
-import card from '../img/Card.png'
-import arrow from '../img/Arrow.png'
+const bg = require('../img/bg.png')
+const logo = require('../img/logo.png')
+const welcome = require('../img/welcome.png')
+const frame = require('../img/frame.png')
+const scan = require('../img/Scan.png')
+const card = require('../img/Card.png')
+const arrow = require('../img/Arrow.png')
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';
 import firebase from '../firebase/firebase'
 import Video from 'react-native-video';
 
-// import Video from 'react-native-video'
 const { width, height } = Dimensions.get('window');
 
-const WelcomeScreen = ({ navigation }) => {
+const WelcomeScreen = ({ navigation }: { navigation: any }) => {
 
     //firebase
-    const [user, setUser] = useState([]);
+    const [user, setUser] = useState<any>([]);
     const getuser = async () => {
         await firebase
             .database()
             .ref()
             .child('noodles')
             .on('value', snapshot => {
-                const infor = [];
+                var infor:any[] = [];
                 snapshot.forEach(child => {
                     let information = {
                         FullName: child.val().FullName,
@@ -54,7 +53,7 @@ const WelcomeScreen = ({ navigation }) => {
         getuser();
     }, []);
 
-    onSuccess = e => {
+    const onSuccess = (e:{data:any}) => {
 
         for (let index = 0; index < user.length; index++) {
             // const element = data[index];

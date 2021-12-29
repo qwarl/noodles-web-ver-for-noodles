@@ -4,8 +4,8 @@ const { width, height } = Dimensions.get('window');
 const bg = require('../img/bg.png')
 const logo = require('../img/logo.png')
 const error = require('../img/error.png')
-const scan = require('../img/scan.png')
-const arrow = require('../img/arrow.png')
+const scan = require('../img/Scan.png')
+const arrow = require('../img/Arrow.png')
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';
 import firebase from '../firebase/firebase'
@@ -14,7 +14,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 // import { useNavigation } from '@react-navigation/core';
 
 
-const ErrorScreen = ({navigation}) => {
+const ErrorScreen = ({navigation}:{navigation:any}) => {
     // const navigation = useNavigation();
     //firebase
     const [user, setUser] = useState<any>([]);

@@ -4,26 +4,28 @@ import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, Image, Dimensions, ImageBackground, StatusBar, TouchableOpacity, SafeAreaView } from 'react-native'
 const bg = require('../img/bg.png')
 const logo = require('../img/logo.png')
-const frameInfo = require('../img/frameInfo.png')
+const frameInfo = require('../img/FrameInfo.png')
 const noodles2 = require('../img/noodles2.png')
 const noodles3 = require('../img/noodles3.png')
 const noodles1 = require('../img/noodles1.png')
 const _3CupsLeft = require('../img/3CupsLeft.png')
 const GetNoodles = require('../img/GetNoodles.png')
-const avatar = require('../img/avatar.png')
+const avatar = require('../img/Rosamundpike.jpg')
 const hover = require('../img/hover.png')
 const unavailableNoodles = require('../img/unavailableNoodles.png')
 const comeLater = require('../img/comeLater.png')
 import { useSelector, useDispatch } from 'react-redux'
 // import database from '@react-native-firebase/database'
 import firebase from '../firebase/firebase'
+import { RootState } from '../redux/reducers'
 const { width, height } = Dimensions.get('window');
 
-const InfoScreen = (props: { route: any }) => {
+// const InfoScreen = (props: { route: any }) => {
+const InfoScreen = ({route}: { route: any },{navigation}:{navigation:any}) => {
     // const this.route=route.params
-    const {route} = props
+    // const {route} = props
     console.log('route', route.params)
-    const Noodles = useSelector(state => state.NoodlesReducer.noodles);
+    const Noodles = useSelector((state:RootState) => state.NoodlesReducer.noodles);
     // console.log('ahaha', Noodles)
     console.log("_____________________")
 
