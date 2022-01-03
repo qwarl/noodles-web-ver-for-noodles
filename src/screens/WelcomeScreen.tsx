@@ -26,9 +26,9 @@ const WelcomeScreen = ({ navigation }: { navigation: any }) => {
             .database()
             .ref()
             .child('noodles')
-            .on('value', snapshot => {
+            .on('value', (snapshot: any) => {
                 var infor:any[] = [];
-                snapshot.forEach(child => {
+                snapshot.forEach((child:any) => {
                     let information = {
                         FullName: child.val().FullName,
                         Birthday: child.val().Birthday,
