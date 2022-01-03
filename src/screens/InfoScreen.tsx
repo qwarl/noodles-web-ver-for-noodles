@@ -16,7 +16,7 @@ const unavailableNoodles = require('../img/unavailableNoodles.png')
 const comeLater = require('../img/comeLater.png')
 import { useSelector, useDispatch } from 'react-redux'
 // import database from '@react-native-firebase/database'
-import firebase from '../firebase/firebase'
+import {firebase} from '../firebase/firebase'
 import { RootState } from '../redux/reducers'
 const { width, height } = Dimensions.get('window');
 
@@ -87,19 +87,19 @@ const InfoScreen = ({route}: { route: any },{navigation}:{navigation:any}) => {
     }
     //update trang thai ly mi
     const handleUpdateStatusOfNoodles = async () => {
-        await firebase
-            .database()
-            .ref()
-            .child('noodles')
-            .child(route.params.Id)
-            .update({
-                Noodles1: selectedNoodles1 ? !selectedNoodles1 : route.params.Noodles1,
-                Noodles2: selectedNoodles2 ? !selectedNoodles2 : route.params.Noodles2,
-                Noodles3: selectedNoodles3 ? !selectedNoodles3 : route.params.Noodles3,
-            })
-            .then(() => {
-                console.log('update success');
-            })
+        // await firebase
+        //     .database()
+        //     .ref()
+        //     .child('noodles')
+        //     .child(route.params.Id)
+        //     .update({
+        //         Noodles1: selectedNoodles1 ? !selectedNoodles1 : route.params.Noodles1,
+        //         Noodles2: selectedNoodles2 ? !selectedNoodles2 : route.params.Noodles2,
+        //         Noodles3: selectedNoodles3 ? !selectedNoodles3 : route.params.Noodles3,
+        //     })
+        //     .then(() => {
+        //         console.log('update success');
+        //     })
     }
     return (
 

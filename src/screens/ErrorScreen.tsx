@@ -8,7 +8,7 @@ const scan = require('../img/Scan.png')
 const arrow = require('../img/Arrow.png')
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';
-import firebase from '../firebase/firebase'
+import {firebase} from '../firebase/firebase'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 // import { useNavigation } from '@react-navigation/native';
 // import { useNavigation } from '@react-navigation/core';
@@ -23,7 +23,7 @@ const ErrorScreen = ({navigation}:{navigation:any}) => {
             .database()
             .ref()
             .child('noodles')
-            .on('value', snapshot => {
+            .on('value', (snapshot: any[]) => {
                 var infor:any[] = [];
                 snapshot.forEach(child => {
                     let information = {

@@ -12,58 +12,82 @@ const arrow = require('../img/Arrow.png')
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';
-import firebase from '../firebase/firebase'
+import {firebase} from '../firebase/firebase'
 import Video from 'react-native-video';
-
+import { Firestore } from 'firebase/firestore'
+import { getDoc, doc, updateDoc } from 'firebase/firestore/lite';
+import firestore from '@react-native-firebase/firestore';
+import { useSelector, useDispatch } from 'react-redux'
+import {fetchAPI} from '../firebase/noodles'
 const { width, height } = Dimensions.get('window');
 
 const WelcomeScreen = ({ navigation }: { navigation: any }) => {
-
+    
     //firebase
     const [user, setUser] = useState<any>([]);
     const getuser = async () => {
-        await firebase
-            .database()
-            .ref()
-            .child('noodles')
-            .on('value', snapshot => {
-                var infor:any[] = [];
-                snapshot.forEach(child => {
-                    let information = {
-                        FullName: child.val().FullName,
-                        Birthday: child.val().Birthday,
-                        Gender: child.val().Gender,
-                        Department: child.val().Department,
-                        Id: child.val().Id,
-                        Noodles1: child.val().Noodles1,
-                        Noodles2: child.val().Noodles2,
-                        Noodles3: child.val().Noodles3,
+        // const payload = getState();
+        // const docRef = doc(firebase, 'noodles', payload.Id)
+        // const noodleSnapshot = await getDoc(docRef);
+        // console.log('logloglog', noodleSnapshot);
 
-                    };
-                    infor.push(information);
-                    // setData([1, 2, 3]);
-                });
-                setUser(infor);
-                // console.log('data', data);
-                console.log('hihihi', infor)
-            });
+
+
+        const users=await firestore().collection('noodles').get()
+        console.log('sfasf',users);
+        
+
+        // await firebase
+        //     .database()
+        //     .ref()
+        //     .child('noodles')
+        //     .on('value', snapshot => {
+        //         var infor:any[] = [];
+        //         snapshot.forEach(child => {
+        //             let information = {
+        //                 FullName: child.val().FullName,
+        //                 Birthday: child.val().Birthday,
+        //                 Gender: child.val().Gender,
+        //                 Department: child.val().Department,
+        //                 Id: child.val().Id,
+        //                 Noodles1: child.val().Noodles1,
+        //                 Noodles2: child.val().Noodles2,
+        //                 Noodles3: child.val().Noodles3,
+
+        //             };
+        //             infor.push(information);
+        //             // setData([1, 2, 3]);
+        //         });
+        //         setUser(infor);
+        //         // console.log('data', data);
+        //         console.log('hihihi', infor)
+        //     });
     };
-
+    const dispatch = useDispatch();
     useEffect(() => {
-        getuser();
+
+        
+        
     }, []);
 
-    const onSuccess = (e:{data:any}) => {
+    const onSuccess = (e: any) => {
 
-        for (let index = 0; index < user.length; index++) {
-            // const element = data[index];
-            if (user[index].Id == e.data) {
-                navigation.navigate('InfoScreen', user[index])
-                return;
-            } else {
-                navigation.navigate('ErrorScreen')
-            }
-        }
+        if (e.data) {
+            navigation.navigate('InfoScreen', { id: e.data })
+          } else {
+            navigation.navigate('ErrorScreen')
+          }
+
+
+        // for (let index = 0; index < user.length; index++) {
+        //     // const element = data[index];
+        //     if (user[index].Id == e.data) {
+        //         navigation.navigate('InfoScreen', user[index])
+        //         return;
+        //     } else {
+        //         navigation.navigate('ErrorScreen')
+        //     }
+        // }
         // );
     };
     return (
