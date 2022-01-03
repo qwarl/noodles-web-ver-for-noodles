@@ -1,8 +1,8 @@
 
-// import * as firebase from 'firebase'
-// declare var firebase: import('firebase');
-// import firebase from 'firebase';
-import firebase from 'firebase/app';
+// import { initializeApp } from 'firebase/app' // no compat for new SDK
+// import { getDatabase, ref } from 'firebase/database'
+import firebase from 'firebase/compat/app'
+import 'firebase/compat/database'
 const Config = {
   apiKey: "AIzaSyAkP3OJsHDL38TdAS25ks0FTsNki5YckWo",
   authDomain: "fix-mi-ly-15-12.firebaseapp.com",
@@ -14,5 +14,14 @@ const Config = {
   measurementId: "G-95GC8FM64D"
 };
 var firebaseConfig = firebase.initializeApp(Config)
+console.log('firebase connected', firebaseConfig);
+
 // firebase.initializeApp(Config);
 export default firebaseConfig;
+
+// const app = initializeApp(Config)
+// console.log("dc hong day",app);
+
+// const database = getDatabase(app)
+// export const userNoodles = ref(database,'noodles')
+// export default app
