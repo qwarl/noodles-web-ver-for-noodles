@@ -82,7 +82,7 @@ const InfoScreen = ({route}: { route: any },{navigation}:{navigation:any}) => {
                 await setNoodles3(false)
                 setSelectedNoodles3(false)
             }
-            navigation.navigate('DoneScreen')
+            navigation.navigate('WelcomeScreen')
         }
     }
     //update trang thai ly mi
@@ -99,6 +99,7 @@ const InfoScreen = ({route}: { route: any },{navigation}:{navigation:any}) => {
             })
             .then(() => {
                 console.log('update success');
+                navigation.navigate('DoneScreen')
             })
     }
     return (

@@ -8,9 +8,9 @@
 
 import { createStore, StoreEnhancer } from "redux";
 
-import reducer from './reducers'
+import reducer from './reducers/index'
 
-export default function configureStore(initialState:any){
-    const store= createStore(reducer, initialState)
+export default function configureStore(initialState: any) {
+    const store = createStore(reducer, initialState)
     return store;
 }

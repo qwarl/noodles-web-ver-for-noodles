@@ -15,7 +15,7 @@ import { useNavigation } from '@react-navigation/native';
 
 type authScreenProp = StackNavigationProp<RootStackParams, 'WelcomeScreen'>;
 
-const DoneScreen:  FC = () => {
+const DoneScreen = () => {
     const navigation = useNavigation<authScreenProp>();
     return (
         <ImageBackground source={bg} resizeMode='cover' style={styles.container}>

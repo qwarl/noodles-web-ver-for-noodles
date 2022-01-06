@@ -27,8 +27,8 @@ const WelcomeScreen = ({ navigation }: { navigation: any }) => {
             .ref()
             .child('noodles')
             .on('value', (snapshot: any) => {
-                var infor:any[] = [];
-                snapshot.forEach((child:any) => {
+                var infor: any[] = [];
+                snapshot.forEach((child: any) => {
                     let information = {
                         FullName: child.val().FullName,
                         Birthday: child.val().Birthday,
@@ -53,7 +53,7 @@ const WelcomeScreen = ({ navigation }: { navigation: any }) => {
         getuser();
     }, []);
 
-    const onSuccess = (e:{data:any}) => {
+    const onSuccess = (e: { data: any }) => {
 
         for (let index = 0; index < user.length; index++) {
             // const element = data[index];
@@ -75,7 +75,14 @@ const WelcomeScreen = ({ navigation }: { navigation: any }) => {
                 <View style={styles.frameBrown}>
                     <View style={styles.frameYellow}>
                         <Video source={require('../video/vid.mp4')}
-                            style={{ width: '100%', height: '100%' }}
+                            style={{
+                                width: '95%',
+                                height: '91%',
+                                borderRadius: 10,
+                                justifyContent: 'center',
+                                alignSelf: 'center',
+                                marginTop:6
+                            }}
                             controls
                             repeat
                             hideShutterView={false}
@@ -86,18 +93,33 @@ const WelcomeScreen = ({ navigation }: { navigation: any }) => {
             </View>
             <Image style={styles.scan} source={scan} />
             <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 55 }}>
+                <View style={{
+                    width: 87,
+                    height: 108,
+                    marginLeft: 70,
+                    backgroundColor: 'white',
+                    borderRadius: 10,
 
-                <QRCodeScanner
-                    ref={(node) => {
-                        if (node) {
-                            node.reactivate()
-                        }
-                    }}
-                    cameraType='back'
-                    cameraStyle={{ width: 87, height: 108, marginLeft: 70 }}
-                    onRead={onSuccess}
-                // flashMode={RNCamera.Constants.FlashMode.torch}
-                />
+                }}>
+                    <QRCodeScanner
+                        ref={(node) => {
+                            if (node) {
+                                node.reactivate()
+                            }
+                        }}
+                        cameraType='back'
+                        cameraStyle={{
+                            width: '91.5%',
+                            height: '95%',
+                            marginTop: 3,
+                            marginLeft: 2,
+
+                        }}
+                        containerStyle={{ alignItems: 'center' }}
+                        onRead={onSuccess}
+                    // flashMode={RNCamera.Constants.FlashMode.torch}
+                    />
+                </View>
                 <TouchableOpacity >
                     <Image style={styles.arrow} source={arrow} />
                 </TouchableOpacity>
@@ -133,10 +155,11 @@ const styles = StyleSheet.create({
     },
     arrow: {
         // backgroundColor:'black',
-        width: 65,
-        height: 40,
+        width: 60,
+        height: 30,
         // marginLeft: 10,
-        marginRight: 20
+        marginRight: 20,
+        right: -20
         // top:-20,
         // marginBottom: 30,
         // backgroundColor: 'blue',

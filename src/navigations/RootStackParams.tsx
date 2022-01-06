@@ -1,6 +1,6 @@
 export type RootStackParams = {
-    InfoScreen: undefined;
-    DoneScreen: undefined;
-    WelcomeScreen: undefined;
-    ErrorScreen: undefined;
+    InfoScreen: undefined|any;
+    DoneScreen: undefined|any;
+    WelcomeScreen: undefined|any;
+    ErrorScreen: undefined|any;
     };
