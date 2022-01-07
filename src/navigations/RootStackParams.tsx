@@ -3,4 +3,5 @@ export type RootStackParams = {
     DoneScreen: undefined|any;
     WelcomeScreen: undefined|any;
     ErrorScreen: undefined|any;
+    OutOfNoodlesScreen: undefined|any;
     };

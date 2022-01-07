@@ -19,9 +19,15 @@ import { useSelector, useDispatch } from 'react-redux'
 import firebase from '../firebase/firebase'
 import { RootState } from '../redux/reducers'
 const { width, height } = Dimensions.get('window');
+import { RouteProp, useNavigation } from '@react-navigation/native';
+import {RootStackParams} from '../navigations/RootStackParams'
+// type ProfileScreenRouteProp = RouteProp<RootStackParams, 'DoneScreen'>;
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import { StackNavigationProp } from '@react-navigation/stack'
 
+type Props = NativeStackScreenProps<RootStackParams, 'DoneScreen'>;
 // const InfoScreen = (props: { route: any }) => {
-const InfoScreen = ({route}: { route: any },{navigation}:{navigation:any}) => {
+const InfoScreen = ({route, navigation}: Props) => {
     // const this.route=route.params
     // const {route} = props
     console.log('route', route.params)
@@ -82,8 +88,11 @@ const InfoScreen = ({route}: { route: any },{navigation}:{navigation:any}) => {
                 await setNoodles3(false)
                 setSelectedNoodles3(false)
             }
-            navigation.navigate('WelcomeScreen')
+            // navigation.navigate('OutOfNoodlesScreen')
         }
+    }
+    const ComeBackLater=()=>{
+        navigation.navigate("WelcomeScreen")
     }
     //update trang thai ly mi
     const handleUpdateStatusOfNoodles = async () => {
@@ -228,7 +237,7 @@ const InfoScreen = ({route}: { route: any },{navigation}:{navigation:any}) => {
             {
                 Noodles.remain == 0 &&
                 (
-                    <TouchableOpacity onPress={handleGetNoodles}>
+                    <TouchableOpacity onPress={ComeBackLater}>
                         <Image style={styles.GetNoodles} source={comeLater} />
                     </TouchableOpacity>
                 )
